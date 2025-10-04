@@ -6,10 +6,12 @@ import Typo from "@/components/Typo";
 import { verticalScale } from "@/utils/styling";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Button from "@/components/Button";
+import { useRouter } from "expo-router";
 
 const WelcomeScreen = () => {
+  const router = useRouter();
   return (
-    <ScreenWrapper showPattern={true}>
+    <ScreenWrapper showPattern={true} bgOpacity={0.5}>
       <View style={styles.container}>
         <View style={{ alignItems: "center" }}>
           <Typo color={colors.white} size={43} fontWeight={"900"}>
@@ -36,7 +38,11 @@ const WelcomeScreen = () => {
           </Typo>
         </View>
 
-        <Button loading={false} style={{ backgroundColor: colors.white }}>
+        <Button
+          loading={false}
+          style={{ backgroundColor: colors.white }}
+          onPress={() => router.push("/(auth)/register")}
+        >
           <Typo size={23} fontWeight={"bold"}>
             Get Started
           </Typo>

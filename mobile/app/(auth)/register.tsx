@@ -18,6 +18,7 @@ import { verticalScale } from "@/utils/styling";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
 const RegisterScreen = () => {
+  const nameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
@@ -26,8 +27,8 @@ const RegisterScreen = () => {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    if (!emailRef.current || !passwordRef.current) {
-      Alert.alert("Login", "Please fill all the fields");
+    if (!emailRef.current || !passwordRef.current || !nameRef.current) {
+      Alert.alert("Sign Up", "Please fill all the fields");
       setIsLoading(false);
       return;
     }
@@ -42,7 +43,7 @@ const RegisterScreen = () => {
           <View style={styles.header}>
             <BackButton iconSize={28} />
             <Typo size={17} color={colors.white}>
-              Forgot your password?
+              Need some help?
             </Typo>
           </View>
 
@@ -53,11 +54,20 @@ const RegisterScreen = () => {
             >
               <View style={{ gap: spacingY._10, marginBottom: spacingY._15 }}>
                 <Typo size={28} fontWeight={"600"}>
-                  Welcome back
+                  Getting Started
                 </Typo>
-                <Typo color={colors.neutral600}>We are happy to see you</Typo>
+                <Typo color={colors.neutral600}>Create an account</Typo>
               </View>
-
+              <Input
+                placeholder="Enter your name"
+                onChangeText={(value: string) => (nameRef.current = value)}
+                icon={
+                  <Icons.User
+                    size={verticalScale(26)}
+                    color={colors.neutral600}
+                  />
+                }
+              />
               <Input
                 placeholder="Enter your email"
                 onChangeText={(value: string) => (emailRef.current = value)}
@@ -83,15 +93,17 @@ const RegisterScreen = () => {
               <View style={{ marginTop: spacingY._25, gap: spacingX._15 }}>
                 <Button loading={isLoading} onPress={handleSubmit}>
                   <Typo fontWeight={"bold"} color={colors.black} size={20}>
-                    Login
+                    Sign Up
                   </Typo>
                 </Button>
 
                 <View style={styles.footer}>
-                  <Typo color={colors.neutral600}>Don't have an account?</Typo>
-                  <Pressable onPress={() => router.push("/(auth)/register")}>
+                  <Typo color={colors.neutral600}>
+                    Already have an account?
+                  </Typo>
+                  <Pressable onPress={() => router.push("/(auth)/login")}>
                     <Typo fontWeight={"bold"} color={colors.primaryDark}>
-                      Sign up
+                      Login
                     </Typo>
                   </Pressable>
                 </View>
