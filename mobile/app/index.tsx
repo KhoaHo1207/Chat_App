@@ -6,10 +6,10 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FlashScreen() {
-  const router = useRouter();
-  useEffect(() => {
-    setTimeout(() => router.replace("/(auth)/welcome"), 1500);
-  }, []);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   setTimeout(() => router.replace("/(auth)/welcome"), 1500);
+  // }, []);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
